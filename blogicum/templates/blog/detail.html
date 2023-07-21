@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}
+{{ post.location }}. {{ post.date }}
+{% endblock %}
+{% block content %}
+  <article>
+      {% include "includes/attributes_block.html" %}
+      <p>
+        {{ post.text }}
+      </p>          
+    </article>
+{% endblock %}
