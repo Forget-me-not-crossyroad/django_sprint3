@@ -18,7 +18,8 @@ class Category(PublishedModel):
         unique=True,
         max_length=64,
         verbose_name='Идентификатор',
-        help_text='Идентификатор страницы для URL; разрешены символы латиницы, цифры, дефис и подчёркивание.'
+        help_text=('Идентификатор страницы для URL; разрешены символы'
+                   ' латиницы, цифры, дефис и подчёркивание.')
     )
     description = models.TextField(
         verbose_name='Описание',
@@ -43,7 +44,6 @@ class Location(PublishedModel):
     )
 
     class Meta:
-        # verbose_name = 'объект "Местоположение"',
         verbose_name = 'местоположение'
         verbose_name_plural = 'Местоположения'
 
@@ -70,7 +70,8 @@ class Post(PublishedModel):
     )
     pub_date = models.DateTimeField(
         verbose_name='Дата и время публикации',
-        help_text='Если установить дату и время в будущем — можно делать отложенные публикации.'
+        help_text=('Если установить дату и время в будущем'
+                   ' — можно делать отложенные публикации.')
     )
     category = models.ForeignKey(
         Category,
@@ -91,7 +92,6 @@ class Post(PublishedModel):
     )
 
     class Meta:
-        # verbose_name = 'объект "Публикация"'
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
 

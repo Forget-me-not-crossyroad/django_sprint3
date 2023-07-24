@@ -7,8 +7,7 @@ SECRET_KEY = 'django-insecure-j6+j1n9s96)xb&d#octyqxi9nt6tfwagueooua8nnurx1=fhw1
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
-
+ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'pages.apps.PagesConfig',
