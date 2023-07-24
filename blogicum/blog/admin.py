@@ -25,12 +25,12 @@ class PostAdmin(admin.ModelAdmin):
         'created_at',
         'pub_date',
         'category',
-        'location'
+        'location',
     )
     list_editable = (
         'is_published',
         'category',
-        'location'
+        'location',
     )
     search_fields = ('title',)
     list_filter = ('is_published',)
