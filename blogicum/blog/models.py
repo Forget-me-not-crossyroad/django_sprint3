@@ -27,7 +27,6 @@ class Category(PublishedModel):
     )
 
     class Meta:
-        # verbose_name = 'объект "Категория"'
         verbose_name = 'категория'
         verbose_name_plural = 'Категории'
 
