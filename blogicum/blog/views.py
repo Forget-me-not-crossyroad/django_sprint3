@@ -6,6 +6,13 @@ from blog.models import Post, Category
 
 
 def index(request):
+    """Функция для отображения главной страницы.
+    Отображает 5 последних постов. Отображаются
+    следующие атрибуты поста: время публикации,
+    автор, локация, категория, заголовок (первые
+    10 символов)"""
+    # Запрос на получение постов, которые опубликованы не
+    # позже момента запроса и имеют опубликованную категорию
     post_list = Post.objects.select_related('category', 'location').filter(
         is_published=True,
         category__is_published=True,
@@ -16,7 +23,13 @@ def index(request):
 
 
 def post_detail(request, pk):
+    """Функция для отображения детальной информации поста.
+     Отображаются следующие атрибуты поста: время публикации,
+    автор, локация, категория, заголовок"""
     template_name = 'blog/detail.html'
+    # Запрос на получение поста по id, который опубликован не
+    # позже момента запроса и имеет опубликованную категорию.
+    # Возвращает 404 ошибку при невыполнении условий
     post = get_object_or_404(
         Post.objects.filter(Q(is_published=True)
                             & Q(category__is_published=True)
@@ -31,10 +44,19 @@ def post_detail(request, pk):
 
 
 def category_posts(request, category_slug):
+    """Функция для отображения постов,
+    относящихся к выбранной категории. Отображаются
+    следующие атрибуты поста: время публикации,
+    автор, локация, категория, заголовок (первые
+    10 символов)"""
+    # Запрос на получение категории, соответствующей
+    # выбранному slug и опубликованы
     category = get_object_or_404(
         Category.objects.filter(Q(is_published=True)),
         slug=category_slug
     )
+    # Запрос на получение постов по выбранной категории, которые
+    # опубликованы не позже момента запроса
     category_posts = Post.objects.select_related('category').filter(
         is_published=True,
         pub_date__lt=dt.now(),
