@@ -77,7 +77,7 @@ class Post(PublishedModel):
         Category,
         on_delete=models.SET_NULL,
         null=True,
-        related_name='post',
+        related_name='posts',
         verbose_name='Категория',
         help_text='Название категории'
     )
@@ -86,7 +86,7 @@ class Post(PublishedModel):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name='post',
+        related_name='posts',
         verbose_name='Местоположение',
         help_text='Название местоположения'
     )
