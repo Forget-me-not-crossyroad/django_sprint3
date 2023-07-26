@@ -31,9 +31,9 @@ def post_detail(request, pk):
     # позже момента запроса и имеет опубликованную категорию.
     # Возвращает 404 ошибку при невыполнении условий
     post = get_object_or_404(
-        Post.objects.filter(Q(is_published=True)
-                            & Q(category__is_published=True)
-                            & Q(pub_date__lt=dt.now())
+        Post.objects.filter(is_published=True,
+                            category__is_published=True,
+                            pub_date__lt=dt.now()
                             ),
         pk=pk
     )
@@ -52,7 +52,7 @@ def category_posts(request, category_slug):
     # Запрос на получение категории, соответствующей
     # выбранному slug и опубликованы
     category = get_object_or_404(
-        Category.objects.filter(Q(is_published=True)),
+        Category.objects.filter(is_published=True),
         slug=category_slug
     )
     # Запрос на получение постов по выбранной категории, которые
