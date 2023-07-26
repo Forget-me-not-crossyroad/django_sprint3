@@ -58,7 +58,7 @@ def category_posts(request, category_slug):
     )
     # Запрос на получение постов по выбранной категории, которые
     # опубликованы не позже момента запроса
-    category_posts = Post.objects.select_related('category').filter(
+    category_posts = category.posts.all().filter(
         is_published=True,
         pub_date__lt=dt.now(),
         category=category
