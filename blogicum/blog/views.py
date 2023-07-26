@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404, render
 
 from blog.models import Post, Category
 
+DISPLAYED_POSTS_NUMBER = 5
+
 
 def index(request):
     """Функция для отображения главной страницы.
@@ -16,7 +18,7 @@ def index(request):
         is_published=True,
         category__is_published=True,
         pub_date__lt=dt.now()
-    ).order_by('-pub_date')[:5]
+    ).order_by('-pub_date')[:DISPLAYED_POSTS_NUMBER]
     context = {'post_list': post_list}
     return render(request, 'blog/index.html', context)
 
