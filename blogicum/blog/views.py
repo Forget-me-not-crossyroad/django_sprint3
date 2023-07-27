@@ -1,13 +1,14 @@
 from datetime import datetime as dt
 
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 
 from blog.models import Post, Category
 
-DISPLAYED_POSTS_NUMBER = 5
+DISPLAYED_POSTS_NUMBER: int = 5
 
 
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
     """Функция для отображения главной страницы.
     Отображает 5 последних постов. Отображаются
     следующие атрибуты поста: время публикации,
@@ -20,11 +21,11 @@ def index(request):
         category__is_published=True,
         pub_date__lt=dt.now()
     ).order_by('-pub_date')[:DISPLAYED_POSTS_NUMBER]
-    context = {'post_list': post_list}
+    context: dict = {'post_list': post_list}
     return render(request, 'blog/index.html', context)
 
 
-def post_detail(request, pk):
+def post_detail(request: HttpRequest, pk: int) -> HttpResponse:
     """Функция для отображения детальной информации поста.
      Отображаются следующие атрибуты поста: время публикации,
     автор, локация, категория, заголовок"""
@@ -39,13 +40,13 @@ def post_detail(request, pk):
                             ),
         pk=pk
     )
-    context = {
+    context: dict = {
         'post': post,
     }
     return render(request, template_name, context)
 
 
-def category_posts(request, category_slug):
+def category_posts(request: HttpRequest, category_slug: str) -> HttpResponse:
     """Функция для отображения постов,
     относящихся к выбранной категории. Отображаются
     следующие атрибуты поста: время публикации,
@@ -64,5 +65,5 @@ def category_posts(request, category_slug):
         pub_date__lt=dt.now(),
         category=category
     )
-    context = {'category': category, 'post_list': category_posts}
+    context: dict = {'category': category, 'post_list': category_posts}
     return render(request, 'blog/category.html', context)
